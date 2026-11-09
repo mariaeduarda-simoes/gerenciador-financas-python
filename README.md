@@ -24,14 +24,7 @@ python main.py
 
 # Exemplo
 
-```
-=== Gerenciador de Finanças ===
-1 - Adicionar movimentação
-2 - Listar movimentações
-3 - Ver saldo
-4 - Ver total por categoria
-0 - Sair
-```
+![Programa rodando](imagens/print.png)
 
 # Tecnologias
 
