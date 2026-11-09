@@ -1,6 +1,26 @@
+import json
+import os
 from datetime import date
 
-movimentacoes = []
+ARQUIVO = "financas.json"
+
+def carregar():
+    if not os.path.exists(ARQUIVO):
+        return []
+    try:
+        with open(ARQUIVO, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError):
+        print("Não consegui ler o arquivo de dados. Começando vazio.")
+        return []
+
+
+def salvar():
+    with open(ARQUIVO, "w", encoding="utf-8") as f:
+        json.dump(movimentacoes, f, ensure_ascii=False, indent=2)
+
+
+movimentacoes = carregar()
 
 
 def mostrar_menu():
@@ -46,6 +66,7 @@ def adicionar():
     }
 
     movimentacoes.append(movimentacao)
+    salvar()
     print("Movimentação adicionada!")
 
 
