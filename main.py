@@ -64,6 +64,46 @@ def listar():
         )
 
 
+def ver_saldo():
+    print("\n--- Saldo ---")
+
+    receitas = 0
+    despesas = 0
+
+    for mov in movimentacoes:
+        if mov["tipo"] == "receita":
+            receitas += mov["valor"]
+        else:
+            despesas += mov["valor"]
+
+    saldo = receitas - despesas
+
+    print(f"Receitas: R$ {receitas:.2f}")
+    print(f"Despesas: R$ {despesas:.2f}")
+    print(f"Saldo atual: R$ {saldo:.2f}")
+
+
+def total_por_categoria():
+    print("\n--- Gastos por categoria ---")
+
+    totais = {}
+
+    for mov in movimentacoes:
+        if mov["tipo"] == "despesa":
+            categoria = mov["categoria"]
+            if categoria in totais:
+                totais[categoria] += mov["valor"]
+            else:
+                totais[categoria] = mov["valor"]
+
+    if len(totais) == 0:
+        print("Nenhuma despesa cadastrada ainda.")
+        return
+
+    for categoria, total in totais.items():
+        print(f"{categoria}: R$ {total:.2f}")
+
+
 while True:
     mostrar_menu()
     opcao = input("Escolha uma opção: ")
@@ -73,9 +113,9 @@ while True:
     elif opcao == "2":
         listar()
     elif opcao == "3":
-        print("Saldo: em construção")
+        ver_saldo()
     elif opcao == "4":
-        print("Categorias: em construção")
+        total_por_categoria()
     elif opcao == "0":
         print("Até mais!")
         break
